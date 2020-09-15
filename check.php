@@ -8,18 +8,19 @@
 );
 
 if (mb_strlen($login) < 5 || mb_strlen($login) > 90 ){
-     echo "Недопустима довжина логіну";
+     echo "Недопустимa довжина логіну";
      exit();
  } else if (mb_strlen($name) < 3 || mb_strlen($name) > 50 ){
-    echo "Недопустима довжина логіну";
+    echo "Недопустима довжина ім'я";
     exit();
- }else if (mb_strlen($pass) < 2 || mb_strlen($pass) > 6 ){
-        echo "Недопустима довжина логіну";
+ }else if (mb_strlen($pass) < 6 || mb_strlen($pass) > 15 ){
+        echo "Недопустима довжина Паролю";
         exit();
  } 
-$mysql = new mysqli('localhost', 'Volodia', '123456', 'register_bd');
-$mysql->query("INSERT INTO `users` (`id`, `login`, `pass`, `name`) VALUES('$login', '$pass', '$name')");
 
-$mysql->close();
+$mysql = new mysqli('127.0.0.1:3306', 'Volodia', '123456', 'register_bd') or die('Помилка підключення:' .mysqli_error());
+$mysql ->query("INSERT INTO `users` (`id`, `login`, `pass`, `name`) VALUES (NULL,'login', 'pass', 'name')");
+$mysql ->close();
 
- ?>
+header('Location: /');
+
